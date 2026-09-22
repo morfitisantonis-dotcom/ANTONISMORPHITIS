@@ -7,9 +7,13 @@ function RentalCard({x}:any){
  const min=Math.max(1,Number(x.min_days||1));
  const [days,setDays]=useState(min);
  const base=Number(x.price||0);
- const discount=days>=30?Number(x.discount_30_days||0):days>=10?Number(x.discount_10_days||0):0;
- const daily=base*(1-discount/100);
- const total=daily*days;
+ const monthly=Number(x.monthly_price||base*30);
+ const cappedDays=Math.min(days,30);
+ const fullAtDaily=base*cappedDays;
+ const progress=(cappedDays-1)/29;
+ const targetAt30=monthly;
+ const total=cappedDays<=1?base:fullAtDaily-(fullAtDaily-targetAt30)*progress;
+ const daily=total/cappedDays;
  const imgs=(x.website_offer_images||[]).sort((a:any,b:any)=>a.sort_order-b.sort_order);
  const [photo,setPhoto]=useState(0);
  useEffect(()=>{if(imgs.length<2)return;const t=setInterval(()=>setPhoto(v=>(v+1)%imgs.length),3000);return()=>clearInterval(t)},[imgs.length]);
@@ -18,12 +22,12 @@ function RentalCard({x}:any){
   <div className="offerMeta"><span>{x.category}</span><span>{x.status}</span></div><h2>{x.title}</h2><p>{x.description}</p>
   {x.perfect_for?.length>0&&<div className="perfectFor"><b>Perfect for</b><p>{x.perfect_for.join(" · ")}</p></div>}
   {x.features?.length>0&&<p className="offerFeatures">{x.features.join(" · ")}</p>}
-  <div className="rentalOptions"><div><b>Flexible rental</b><strong>€{base.toFixed(2)} / day</strong><label>How many days?<input type="number" min={min} value={days} onChange={e=>setDays(Math.max(min,Number(e.target.value)||min))}/></label>{discount>0&&<small>{discount}% long-stay discount applied</small>}<h3>Total: €{total.toFixed(2)}</h3></div>{x.monthly_price!=null&&<div><b>Permanent customer</b><strong>€{Number(x.monthly_price).toFixed(2)} / month</strong><p>Monthly subscription for continuous use.</p></div>}</div>
+  <div className="rentalOptions"><div><b>Flexible rental</b><strong>€{base.toFixed(2)} / day</strong><label>How many days?<input type="number" min={min} value={days} onChange={e=>setDays(Math.max(min,Number(e.target.value)||min))}/></label><small>The longer you rent, the lower the effective daily rate.</small><h3>Total: €{total.toFixed(2)}</h3><p className="effectiveRate">€{daily.toFixed(2)} effective / day</p></div>{x.monthly_price!=null&&<div><b>30 days / monthly</b><strong>€{monthly.toFixed(2)} / 30 days</strong><p>Lowest price point. For continuous use, renew for another 30 days.</p></div>}</div>
   <div className="actions">{x.demo_url&&<a href={x.demo_url} target="_blank" rel="noreferrer">Live Demo →</a>}<a href={`mailto:morfitisantonis@gmail.com?subject=Rent ${encodeURIComponent(x.title)} for ${days} days&body=Rental total: €${total.toFixed(2)}`}>Rent this website →</a></div>
  </article>
 }
 export default function Page(){
  const [items,setItems]=useState<any[]>([]);
  useEffect(()=>{supabase.from("website_offers").select("*,website_offer_images(*)").eq("offer_type","rent").eq("published",true).order("sort_order").then(({data})=>setItems(data||[]))},[]);
- return <main className="listing"><p className="eyebrow">READY-MADE WEBSITES</p><h1>Rent a Website</h1><p>Choose exactly how many days you need a website, or use a monthly plan for continuous use. Your total is calculated automatically.</p><div className="grid">{items.length===0?<article><h2>Coming soon</h2><p>New websites will appear here when published from the admin.</p></article>:items.map(x=><RentalCard key={x.id} x={x}/>)}</div><Link href="/">← Back to portfolio</Link></main>
+ return <main className="listing"><p className="eyebrow">READY-MADE WEBSITES</p><h1>Rent a Website</h1><p>Choose exactly how many days you need a website, and the price reduces progressively as the rental gets longer. The 30-day price is the lowest price point, so shorter rentals never become cheaper than a full month.</p><div className="grid">{items.length===0?<article><h2>Coming soon</h2><p>New websites will appear here when published from the admin.</p></article>:items.map(x=><RentalCard key={x.id} x={x}/>)}</div><Link href="/">← Back to portfolio</Link></main>
 }
