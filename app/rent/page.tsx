@@ -14,7 +14,7 @@ function RentalCard({x}:any){
  const targetAt30=monthly;
  const total=cappedDays<=1?base:fullAtDaily-(fullAtDaily-targetAt30)*progress;
  const daily=total/cappedDays;
- const imgs=(x.website_offer_images||[]).sort((a:any,b:any)=>a.sort_order-b.sort_order);
+ const imgs=(x.website_offer_images||[]).filter((im:any)=>im?.image_url).sort((a:any,b:any)=>Number(a.sort_order||0)-Number(b.sort_order||0));
  const [photo,setPhoto]=useState(0);
  useEffect(()=>{if(imgs.length<2)return;const t=setInterval(()=>setPhoto(v=>(v+1)%imgs.length),3000);return()=>clearInterval(t)},[imgs.length]);
  return <article className="rentalCard">
@@ -28,6 +28,6 @@ function RentalCard({x}:any){
 }
 export default function Page(){
  const [items,setItems]=useState<any[]>([]);
- useEffect(()=>{supabase.from("website_offers").select("*,website_offer_images(*)").eq("offer_type","rent").eq("published",true).order("sort_order").then(({data})=>setItems(data||[]))},[]);
+ useEffect(()=>{let active=true;async function load(){const {data}=await supabase.from("website_offers").select("*,website_offer_images(*)").eq("offer_type","rent").eq("published",true).order("sort_order");if(active)setItems((data||[]).map((x:any)=>({...x,website_offer_images:(x.website_offer_images||[]).filter((im:any)=>im?.image_url)})))}load();const channel=supabase.channel("rental-live").on("postgres_changes",{event:"*",schema:"public",table:"website_offer_images"},load).on("postgres_changes",{event:"*",schema:"public",table:"website_offers"},load).subscribe();return()=>{active=false;supabase.removeChannel(channel)}},[]);
  return <main className="listing"><p className="eyebrow">READY-MADE WEBSITES</p><h1>Rent a Website</h1><p>Choose exactly how many days you need a website, and the price reduces progressively as the rental gets longer. The 30-day price is the lowest price point, so shorter rentals never become cheaper than a full month.</p><div className="grid">{items.length===0?<article><h2>Coming soon</h2><p>New websites will appear here when published from the admin.</p></article>:items.map(x=><RentalCard key={x.id} x={x}/>)}</div><Link href="/">← Back to portfolio</Link></main>
 }
