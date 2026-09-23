@@ -58,3 +58,18 @@
 }
 .grid article>a[target="_blank"]::after{content:"↗";font-size:17px;line-height:1}
 @media(hover:hover) and (pointer:fine){.grid article>a[target="_blank"]:hover{transform:translateY(-2px);background:#0d3027;box-shadow:0 8px 18px #0002}}
+
+
+/* Premium View Project CTA */
+.grid article>a:not([target="_blank"]){
+ display:inline-flex;align-items:center;justify-content:center;gap:11px;
+ margin-top:14px;padding:13px 21px;border:1px solid #123f33;border-radius:999px;
+ background:#123f33;color:#fff!important;text-decoration:none;
+ font-size:13px;font-weight:800;letter-spacing:.65px;text-transform:uppercase;
+ transition:transform .2s ease,background .2s ease,box-shadow .2s ease;
+}
+.grid article>a:not([target="_blank"])::after{content:"→";font-size:18px;line-height:1;transition:transform .2s ease}
+@media(hover:hover) and (pointer:fine){
+ .grid article>a:not([target="_blank"]):hover{transform:translateY(-2px);background:#0d3027;box-shadow:0 9px 20px #0002}
+ .grid article>a:not([target="_blank"]):hover::after{transform:translateX(4px)}
+}
