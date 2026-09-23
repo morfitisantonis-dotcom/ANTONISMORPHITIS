@@ -2,6 +2,7 @@
 import Link from "next/link";
 import {useEffect,useState} from "react";
 import {supabase} from "../../lib/supabase";
+import WebsiteCheckoutButton from "../../components/WebsiteCheckoutButton";
 
 function RentalCard({x}:{x:any}){
  const min=Math.max(1,Number(x.min_days||1));
@@ -18,8 +19,8 @@ function RentalCard({x}:{x:any}){
   {x.perfect_for?.length>0&&<div className="perfectFor"><b>Perfect for</b><p>{x.perfect_for.join(" · ")}</p></div>}
   {x.features?.length>0&&<p className="offerFeatures">{x.features.join(" · ")}</p>}
   <div className="rentalOptions">
-   <div><b>Pay per day</b><strong>€{base.toFixed(2)} / day</strong><label>How many days?<input type="number" min={min} value={days} onChange={e=>setDays(Math.max(min,Number(e.target.value)||min))}/></label><small>Exact calculation: {days} × €{base.toFixed(2)}</small><h3>Total: €{total.toFixed(2)}</h3><div className="actions"><a className="pricingBuyButton" href={`mailto:morfitisantonis@gmail.com?subject=Daily rental - ${encodeURIComponent(x.title)}&body=I want to rent ${x.title} for ${days} day(s). Rental price: €${base.toFixed(2)} per day. Total: €${total.toFixed(2)}.`}>Rent Now · €{total.toFixed(2)} →</a></div></div>
-   {monthly>0&&<div><b>Monthly subscription</b><strong>€{monthly.toFixed(2)} / month</strong><p>Fixed monthly price. This price is independent from the daily rental rate.</p>{base>0&&monthly<base*30&&<p className="priceGood">Save €{(base*30-monthly).toFixed(2)} vs 30 days at the daily rate.</p>}<div className="actions"><a className="pricingBuyButton" href={`mailto:morfitisantonis@gmail.com?subject=Monthly subscription - ${encodeURIComponent(x.title)}&body=I want the monthly subscription for ${x.title}. Subscription price: €${monthly.toFixed(2)} per month.`}>Subscribe · €{monthly.toFixed(2)}/month →</a></div></div>}
+   <div><b>Pay per day</b><strong>€{base.toFixed(2)} / day</strong><label>How many days?<input type="number" min={min} max={365} value={days} onChange={e=>setDays(Math.min(365,Math.max(min,Number(e.target.value)||min)))}/></label><small>Exact calculation: {days} × €{base.toFixed(2)}</small><h3>Total: €{total.toFixed(2)}</h3><WebsiteCheckoutButton offerId={x.id} type="daily" days={days} label={`Rent Now · €${total.toFixed(2)} →`}/></div>
+   {monthly>0&&<div><b>Monthly subscription</b><strong>€{monthly.toFixed(2)} / month</strong><p>Fixed monthly price. This price is independent from the daily rental rate.</p>{base>0&&monthly<base*30&&<p className="priceGood">Save €{(base*30-monthly).toFixed(2)} vs 30 days at the daily rate.</p>}<WebsiteCheckoutButton offerId={x.id} type="monthly" label={`Subscribe · €${monthly.toFixed(2)}/month →`}/></div>}
   </div>
   <div className="actions">{x.demo_url&&<a href={x.demo_url} target="_blank" rel="noreferrer">Live Demo →</a>}</div>
  </article>
