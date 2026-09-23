@@ -13,25 +13,30 @@ export async function POST(req:Request){
  let event:Stripe.Event;
  try{event=stripe.webhooks.constructEvent(body,sig,webhookSecret)}
  catch(e:any){return NextResponse.json({error:'Invalid signature: '+e.message},{status:400})}
- if(event.type==='checkout.session.completed'){
-  const session=event.data.object as Stripe.Checkout.Session;
-  if(session.payment_status==='paid'){
-   const courseId=session.metadata?.course_id;
-   const code=session.metadata?.purchase_code;
-   if(courseId&&code){
-    const db=supabaseService();
-    const {data:valid}=await db.rpc('consume_course_purchase_code',{p_course_id:courseId,p_code:code});
-    if(valid){
-     const {error}=await db.rpc('record_paid_course_purchase',{
-      p_course_id:courseId,
-      p_payment_reference:session.id,
-      p_amount:(session.amount_total||0)/100,
-      p_customer_email:session.customer_details?.email||null
-     });
-     if(error) return NextResponse.json({error:error.message},{status:500});
+ try{
+  if(event.type==='checkout.session.completed'){
+   const session=event.data.object as Stripe.Checkout.Session;
+   if(session.payment_status==='paid'||session.mode==='subscription'){
+    const courseId=session.metadata?.course_id;
+    const code=session.metadata?.purchase_code;
+    if(courseId&&code){
+     const db=supabaseService();
+     const {data:valid}=await db.rpc('consume_course_purchase_code',{p_course_id:courseId,p_code:code});
+     if(valid){
+      const {error}=await db.rpc('record_paid_course_purchase',{p_course_id:courseId,p_payment_reference:session.id,p_amount:(session.amount_total||0)/100,p_customer_email:session.customer_details?.email||null});
+      if(error) throw error;
+     }
     }
+    // Website checkout sessions carry website_offer_id and checkout_type metadata.
+    // Stripe remains the payment/subscription source of truth; no client-supplied price is trusted.
    }
   }
+  if(event.type==='invoice.paid'||event.type==='invoice.payment_failed'||event.type==='customer.subscription.updated'||event.type==='customer.subscription.deleted'){
+   console.log('Stripe billing event',event.type,event.id);
+  }
+  return NextResponse.json({received:true});
+ }catch(e:any){
+  console.error('Webhook processing error',e);
+  return NextResponse.json({error:e?.message||'Webhook processing failed'},{status:500});
  }
- return NextResponse.json({received:true});
 }
