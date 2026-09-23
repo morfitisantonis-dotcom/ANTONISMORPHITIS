@@ -32,3 +32,17 @@
 
 /* Rental projects on home */
 .homeRentalGrid{margin:30px 0}.homeRentalGrid article{overflow:hidden}.homeRentalPrice{font-family:Georgia,serif;font-size:22px;font-weight:700;margin:16px 0}.rentalExplore{display:inline-block;margin-top:24px}
+
+
+/* Horizontal Courses Carousel */
+.courseCarousel{position:relative;padding:0 58px 34px}
+.courseCarousel .trainingGrid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;gap:24px;padding:4px 2px 18px}
+.courseCarousel .trainingGrid::-webkit-scrollbar{display:none}
+.courseCarousel .trainingCard{flex:0 0 calc(50% - 12px);scroll-snap-align:start}
+.courseArrow{position:absolute;top:250px;z-index:5;width:48px;height:48px;border-radius:50%;border:1px solid #bfb7aa;background:#123f33;color:#fff;font-size:34px;line-height:1;cursor:pointer;box-shadow:0 8px 20px #0002}
+.courseArrow:disabled{opacity:.28;cursor:default}
+.coursePrev{left:0}.courseNext{right:0}
+.courseDots{display:flex;justify-content:center;gap:8px;margin-top:8px}
+.courseDots button{width:9px;height:9px;border:0;border-radius:50%;background:#bdb6aa;padding:0;cursor:pointer}
+.courseDots button.active{background:#123f33;transform:scale(1.35)}
+@media(max-width:900px){.courseCarousel{padding:0 44px 30px}.courseCarousel .trainingCard{flex-basis:100%}.courseArrow{top:220px;width:40px;height:40px;font-size:29px}.coursePrev{left:-2px}.courseNext{right:-2px}}
