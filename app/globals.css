@@ -76,3 +76,20 @@
 
 /* Independent rental pricing */
 .pricePreview.wide{grid-column:1/-1;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px 18px}.pricePreview.wide>b,.pricePreview.wide>hr,.pricePreview.wide>.priceGood,.pricePreview.wide>.priceWarning{grid-column:1/-1}.pricePreview.wide hr{width:100%;border:0;border-top:1px solid #d8d2c7}.priceGood{color:#176b45!important;font-weight:800}.priceWarning{color:#a13b2b!important;font-weight:800;background:#fff0ed;padding:9px;border-radius:4px}.rentalOptions .actions{margin-top:14px}.rentalOptions .actions a{width:100%;text-align:center}@media(max-width:700px){.pricePreview.wide{grid-template-columns:1fr 1fr}}
+
+
+/* Public personal story */
+.aboutStory{padding-top:110px;padding-bottom:110px;background:#f1ede5}
+.aboutIntro{max-width:1050px;margin-bottom:56px}
+.aboutIntro h2{font-size:clamp(42px,5vw,72px);line-height:1.02;max-width:980px;margin:12px 0 24px}
+.aboutLead{font-size:21px;line-height:1.65;max-width:760px;color:#3f4743}
+.aboutColumns{display:grid;grid-template-columns:1fr 1fr;gap:70px;max-width:1200px}
+.aboutColumns p{font-size:17px;line-height:1.85;margin:0 0 24px;color:#303735}
+.aboutManifesto{max-width:900px;margin:78px 0 0;padding:42px;border:1px solid #cfc7ba;background:#faf8f4}
+.aboutManifesto h3{font-family:Georgia,serif;font-weight:400;font-size:42px;margin:8px 0 20px}
+.aboutManifesto p:not(.eyebrow){font-size:17px;line-height:1.75;max-width:760px}
+.aboutSignature{margin-top:80px;padding:60px 0 10px;border-top:1px solid #cfc7ba;display:grid;grid-template-columns:180px 1fr;gap:12px 45px;align-items:start}
+.aboutSignature span{font-size:11px;font-weight:800;letter-spacing:3px;color:#6d6253;padding-top:10px}
+.aboutSignature strong{font-family:Georgia,serif;font-size:clamp(42px,5.5vw,78px);line-height:.98;font-weight:400}
+.aboutSignature p{grid-column:2;max-width:650px;font-size:16px;line-height:1.7;color:#4c524f}
+@media(max-width:800px){.aboutStory{padding-top:70px;padding-bottom:70px}.aboutColumns{grid-template-columns:1fr;gap:0}.aboutLead{font-size:18px}.aboutColumns p{font-size:16px}.aboutManifesto{margin-top:45px;padding:26px}.aboutManifesto h3{font-size:34px}.aboutSignature{margin-top:50px;grid-template-columns:1fr;gap:18px}.aboutSignature p{grid-column:1}.aboutSignature strong{font-size:46px}}
