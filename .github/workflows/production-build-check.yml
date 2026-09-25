@@ -24,3 +24,17 @@ jobs:
 
       - name: Production build
         run: npm run build
+
+      - name: Verify morphitisantonis.live deployment
+        shell: bash
+        run: |
+          for attempt in {1..18}; do
+            body="$(curl -fsSL --max-time 20 https://morphitisantonis.live || true)"
+            if grep -q "MORPHITIS MENTORING CLUB" <<<"$body"; then
+              echo "Morphitis Mentoring Club is live on morphitisantonis.live"
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "The live site did not expose the Mentoring section during the verification window." >&2
+          exit 1
