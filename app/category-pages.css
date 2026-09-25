@@ -1,0 +1,14 @@
+/* Category-first portfolio pages */
+.homeCategorySection{min-height:330px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center}
+.homeCategorySection>p:not(.eyebrow){max-width:720px;font-size:18px;line-height:1.65;margin:0 0 26px;color:#4b504d}
+.homeCategorySection .button,.homeCategorySection .lightButton{display:inline-block;margin-top:0}
+.homeMentoringTeaser{background:#101817;color:#fff}
+.homeMentoringTeaser .eyebrow{color:#c8ae81}
+.homeMentoringTeaser>p:not(.eyebrow),.homeCategorySection.dark>p:not(.eyebrow){color:#cbd2cf}
+.categoryPage{min-height:100vh}.standaloneSection{border-top:0;min-height:100vh}.categoryListing{padding-top:90px}
+.trainingIntro h1,.aboutIntro h1,.contactStandalone h1{font-family:Georgia,serif;font-weight:400;font-size:clamp(48px,6vw,78px);line-height:1.02;margin:10px 0 22px}
+.backLink{display:inline-block;margin-top:45px;color:#123f33;font-weight:800;text-decoration:none}.lightBackLink{color:#fff}
+.pageBackWrap{background:#101817;padding:0 4% 70px}
+.servicePageCards{margin:45px 0}.servicePageCards article{min-height:220px}.servicePageCards h2{font-size:30px;margin-bottom:14px}
+.contactPage{min-height:100vh;background:#101817}.contactStandalone{min-height:100vh;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;border-top:0}.contactStandalone>p:not(.eyebrow){max-width:650px;font-size:18px;line-height:1.7}
+@media(max-width:700px){.homeCategorySection{min-height:260px;padding-top:54px;padding-bottom:54px}.homeCategorySection h2{font-size:42px;margin-bottom:18px}.homeCategorySection>p:not(.eyebrow){font-size:16px;margin-bottom:22px}.categoryListing{padding-top:60px}.servicePageCards{grid-template-columns:1fr}.trainingIntro h1,.aboutIntro h1,.contactStandalone h1{font-size:46px}}
