@@ -17,6 +17,7 @@ const packages=[
    "Direct communication with me."
   ],
   platform:"ONLINE INCOME · DIGITAL PROJECTS",
+  telegram:"Join the Telegram group instantly — free access.",
   cta:"Join the Free Group",
   href:"https://t.me/+0p0bdnLVt7szYTFk"
  },
@@ -35,6 +36,7 @@ const packages=[
    "Help with consistency and a stronger online presence."
   ],
   platform:"INSTAGRAM · FACEBOOK",
+  telegram:"Includes access to the private Telegram group.",
   cta:"Choose Social Action",
   href:""
  },
@@ -54,6 +56,7 @@ const packages=[
    "Flexible participation based on your available time."
   ],
   platform:"MULTI-PLATFORM GUIDANCE",
+  telegram:"Includes access to the private Telegram group.",
   cta:"Choose Community Growth",
   href:"",
   featured:true
@@ -105,6 +108,7 @@ export default function MentoringCarousel(){
      <ul className="mentoringBenefits">{item.benefits.map(x=><li key={x}>{x}</li>)}</ul>
      {item.featured&&<div className="mentoringFlexNote"><b>Participate at your own pace.</b><p>You are not required to post every day or follow the full suggested program. You can join the group, discuss ideas, receive feedback and use the guidance even on days when you do not publish anything.</p></div>}
      <div className="mentoringPlatform">{item.platform}</div>
+     <div className="mentoringTelegramNote">✈ {item.telegram}</div>
      {i===0?<a className="mentoringCta" href={item.href} target="_blank" rel="noreferrer">{item.cta}</a>:<MentoringJoinButton plan={i===1?"social-action":"community-growth"} label={item.cta}/>}
     </article>)}
    </div>
