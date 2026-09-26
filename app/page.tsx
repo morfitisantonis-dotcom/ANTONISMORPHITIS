@@ -15,7 +15,7 @@ const nav=[
 
 export default async function Home(){
  const {data:settings}=await supabase.from("site_settings").select("*").eq("id","main").maybeSingle();
- return <><header><div className="brand"><b>AM　MORPHITIS ANTONIS</b><small>DIGITAL SOLUTIONS</small></div><nav>{nav.map(([label,href,sub])=><a key={label} href={href}><b>{label.toUpperCase()}</b><small>{sub}</small></a>)}</nav></header><main>
+ return <><header><div className="brand"><b>MORPHITIS ANTONIS</b><small>DIGITAL SOLUTIONS</small></div><nav>{nav.map(([label,href,sub])=><a key={label} href={href}><b>{label.toUpperCase()}</b><small>{sub}</small></a>)}</nav></header><main>
   <section className="hero"><div><p>CREATOR • ENTREPRENEUR • DIGITAL BUILDER</p><h1>Discipline today.<br/>A better tomorrow.</h1><p>I’m Morphitis Antonis — a creator and entrepreneur focused on turning ideas into real digital projects. I build, experiment, learn and improve, with one simple belief: progress comes from taking action consistently.</p><div className="actions"><a href="/projects">View My Work →</a><a href="/about">Who I Am →</a></div></div><div className="portrait">{settings?.hero_image_url?<img src={settings.hero_image_url} alt="Morphitis Antonis"/>:"MORPHITIS ANTONIS"}</div></section>
 
   <section className="homeCategorySection homeMentoringTeaser"><p className="eyebrow">MORPHITIS MENTORING CLUB</p><h2>Mentoring Plans</h2><p>Choose the level of guidance, community support and online growth help that fits you best.</p><a className="lightButton" href="/mentoring">Explore Mentoring Plans →</a></section>
@@ -33,5 +33,5 @@ export default async function Home(){
   <section className="homeCategorySection"><p className="eyebrow">WHO I AM</p><h2>About Me</h2><p>Read the story, mindset and principles behind the projects I build.</p><a className="button" href="/about">Read My Story →</a></section>
 
   <section className="homeCategorySection dark"><p className="eyebrow">CONTACT</p><h2>Let’s Build Something Great</h2><p>New opportunities start with a conversation.</p><a className="lightButton" href="/contact">Contact Me →</a></section>
- </main><footer><b>AM　MORPHITIS ANTONIS</b><span>© 2026 Morphitis Antonis.</span></footer></>
+ </main><footer><b>MORPHITIS ANTONIS</b><span>© 2026 Morphitis Antonis.</span></footer></>
 }
