@@ -15,8 +15,8 @@ const nav=[
 
 export default async function Home(){
  const {data:settings}=await supabase.from("site_settings").select("*").eq("id","main").maybeSingle();
- return <><header><div className="brand"><b>AM　ANTONIS MORFITIS</b><small>DIGITAL SOLUTIONS</small></div><nav>{nav.map(([label,href,sub])=><a key={label} href={href}><b>{label.toUpperCase()}</b><small>{sub}</small></a>)}</nav></header><main>
-  <section className="hero"><div><p>CREATOR • ENTREPRENEUR • DIGITAL BUILDER</p><h1>Discipline today.<br/>A better tomorrow.</h1><p>I’m Antonis Morfitis — a creator and entrepreneur focused on turning ideas into real digital projects. I build, experiment, learn and improve, with one simple belief: progress comes from taking action consistently.</p><div className="actions"><a href="/projects">View My Work →</a><a href="/about">Who I Am →</a></div></div><div className="portrait">{settings?.hero_image_url?<img src={settings.hero_image_url} alt="Antonis Morfitis"/>:"ANTONIS MORFITIS"}</div></section>
+ return <><header><div className="brand"><b>AM　ANTONIS MORPHITIS</b><small>DIGITAL SOLUTIONS</small></div><nav>{nav.map(([label,href,sub])=><a key={label} href={href}><b>{label.toUpperCase()}</b><small>{sub}</small></a>)}</nav></header><main>
+  <section className="hero"><div><p>CREATOR • ENTREPRENEUR • DIGITAL BUILDER</p><h1>Discipline today.<br/>A better tomorrow.</h1><p>I’m Antonis Morphitis — a creator and entrepreneur focused on turning ideas into real digital projects. I build, experiment, learn and improve, with one simple belief: progress comes from taking action consistently.</p><div className="actions"><a href="/projects">View My Work →</a><a href="/about">Who I Am →</a></div></div><div className="portrait">{settings?.hero_image_url?<img src={settings.hero_image_url} alt="Antonis Morphitis"/>:"ANTONIS MORPHITIS"}</div></section>
 
   <section className="homeCategorySection"><p className="eyebrow">SELECTED WORK</p><h2>Projects</h2><p>Explore websites, e-commerce brands and digital systems I have built.</p><a className="button" href="/projects">Explore My Projects →</a></section>
 
@@ -33,5 +33,5 @@ export default async function Home(){
   <section className="homeCategorySection"><p className="eyebrow">WHO I AM</p><h2>About Me</h2><p>Read the story, mindset and principles behind the projects I build.</p><a className="button" href="/about">Read My Story →</a></section>
 
   <section className="homeCategorySection dark"><p className="eyebrow">CONTACT</p><h2>Let’s Build Something Great</h2><p>New opportunities start with a conversation.</p><a className="lightButton" href="/contact">Contact Me →</a></section>
- </main><footer><b>AM　ANTONIS MORFITIS</b><span>© 2026 Antonis Morfitis.</span></footer></>
+ </main><footer><b>AM　ANTONIS MORPHITIS</b><span>© 2026 Antonis Morphitis.</span></footer></>
 }
