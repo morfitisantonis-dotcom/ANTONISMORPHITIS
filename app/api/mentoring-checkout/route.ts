@@ -21,7 +21,6 @@ export async function POST(req:Request){
    line_items:[{quantity:1,price_data:{currency:"eur",unit_amount:selected.amount,recurring:{interval:"month"},product_data:{name:selected.name}}}],
    allow_promotion_codes:true,
    billing_address_collection:"auto",
-   customer_creation:"always",
    metadata:{checkout_type:"mentoring_subscription",mentoring_plan:plan},
    subscription_data:{metadata:{checkout_type:"mentoring_subscription",mentoring_plan:plan}},
    success_url:origin+"/mentoring/success?session_id={CHECKOUT_SESSION_ID}",
