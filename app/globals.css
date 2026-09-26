@@ -156,3 +156,52 @@
  .billingItemFoot button{width:100%}
  .billingUpdated{text-align:left}
 }
+
+
+/* Compact uniform carousel cards — mentoring + courses */
+@media(min-width:1001px){
+ .mentoringSection{padding-top:72px;padding-bottom:72px}
+ .mentoringIntro{margin-bottom:30px}
+ .mentoringIntro h2{font-size:48px;margin-bottom:14px}
+ .mentoringIntro>p:last-child{font-size:16px}
+ .mentoringCarousel{padding:8px 58px 24px}
+ .mentoringTrack{gap:16px;align-items:stretch}
+ .mentoringCard{flex:0 0 calc(33.333% - 11px);min-height:500px;padding:24px}
+ .mentoringCardTop{padding-bottom:15px}
+ .mentoringPrice strong{font-size:30px}
+ .mentoringCard h3{font-size:27px;margin:18px 0 9px}
+ .mentoringFor{min-height:76px;font-size:14px;line-height:1.5;margin-bottom:15px}
+ .mentoringBenefits{gap:8px;margin-bottom:16px}
+ .mentoringBenefits li{font-size:13px;line-height:1.35}
+ .mentoringFlexNote{padding:11px;margin-bottom:14px}
+ .mentoringFlexNote p{font-size:12px}
+ .mentoringPlatform{padding-top:14px}
+ .mentoringCta{min-height:44px;margin-top:13px;padding:11px 13px}
+ .mentoringArrow{width:44px;height:44px;font-size:30px}
+
+ .trainingSection{padding-top:72px;padding-bottom:72px}
+ .trainingIntro{margin-bottom:28px}
+ .trainingIntro h2{font-size:42px;margin-bottom:14px}
+ .trainingIntro>p:last-child{font-size:16px}
+ .courseCarousel{padding:0 58px 26px}
+ .courseCarousel .trainingGrid{gap:16px;align-items:stretch}
+ .courseCarousel .trainingCard{flex:0 0 calc(33.333% - 11px);display:flex;flex-direction:column}
+ .trainingImage{height:180px}
+ .trainingBody{padding:20px;display:flex;flex-direction:column;flex:1}
+ .trainingTop{font-size:9px;letter-spacing:1.2px}
+ .trainingCard h3{font-size:25px;margin:11px 0 7px}
+ .trainingDesc{font-size:14px;line-height:1.45}
+ .trainingPrice{padding:12px 0;margin:14px 0;gap:8px}
+ .trainingPrice strong{font-size:28px}
+ .trainingPrice span{font-size:9px;letter-spacing:.8px}
+ .courseSalesLive{margin:8px 0 13px;padding:8px 10px;font-size:12px}
+ .courseSalesLive b{font-size:20px}
+ .trainingBlock{margin-top:14px}
+ .trainingBlock>b{font-size:10px}
+ .trainingBlock ul{grid-template-columns:1fr;gap:5px;padding-left:17px;font-size:12px}
+ .trainingTags{gap:5px;margin-top:8px}
+ .trainingTags span{padding:6px 7px;font-size:10px}
+ .trainingActions{margin-top:auto;padding-top:18px;gap:12px}
+ .buyCourse{padding:12px 14px}
+ .courseArrow{top:190px;width:44px;height:44px;font-size:30px}
+}
