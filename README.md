@@ -1,4 +1,4 @@
-# Antonis Morfitis Portfolio
+# Morphitis Antonis Portfolio
 
 Next.js portfolio prepared for GitHub → Hostinger Web App deployment.
 
