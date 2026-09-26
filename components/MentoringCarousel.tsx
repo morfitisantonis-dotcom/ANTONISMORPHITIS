@@ -1,5 +1,6 @@
 "use client";
 import {useEffect,useRef,useState} from "react";
+import MentoringJoinButton from "./MentoringJoinButton";
 
 const packages=[
  {
@@ -17,7 +18,7 @@ const packages=[
   ],
   platform:"ONLINE INCOME · DIGITAL PROJECTS",
   cta:"Join the Free Group",
-  href:"mailto:morfitisantonis@gmail.com?subject=Morphitis%20Mentoring%20Club%20-%20Start%20Online"
+  href:"https://t.me/+0p0bdnLVt7szYTFk"
  },
  {
   tier:"SOCIAL ACTION",
@@ -35,7 +36,7 @@ const packages=[
   ],
   platform:"INSTAGRAM · FACEBOOK",
   cta:"Choose Social Action",
-  href:"mailto:morfitisantonis@gmail.com?subject=Morphitis%20Mentoring%20Club%20-%20Social%20Action"
+  href:""
  },
  {
   tier:"COMMUNITY GROWTH",
@@ -54,7 +55,7 @@ const packages=[
   ],
   platform:"MULTI-PLATFORM GUIDANCE",
   cta:"Choose Community Growth",
-  href:"mailto:morfitisantonis@gmail.com?subject=Morphitis%20Mentoring%20Club%20-%20Community%20Growth",
+  href:"",
   featured:true
  }
 ];
@@ -104,7 +105,7 @@ export default function MentoringCarousel(){
      <ul className="mentoringBenefits">{item.benefits.map(x=><li key={x}>{x}</li>)}</ul>
      {item.featured&&<div className="mentoringFlexNote"><b>Participate at your own pace.</b><p>You are not required to post every day or follow the full suggested program. You can join the group, discuss ideas, receive feedback and use the guidance even on days when you do not publish anything.</p></div>}
      <div className="mentoringPlatform">{item.platform}</div>
-     <a className="mentoringCta" href={item.href}>{item.cta}</a>
+     {i===0?<a className="mentoringCta" href={item.href} target="_blank" rel="noreferrer">{item.cta}</a>:<MentoringJoinButton plan={i===1?"social-action":"community-growth"} label={item.cta}/>}
     </article>)}
    </div>
    <button className="mentoringArrow mentoringNext" type="button" onClick={()=>go(index+1)} disabled={index===packages.length-1} aria-label="Next mentoring package">›</button>
