@@ -79,9 +79,14 @@ export async function POST(req:Request){
    });
 
    const origin=new URL(req.url).origin;
+   const paymentMetadata={payment_request_id:String(created.id),payment_category:category};
    const link=await stripe.paymentLinks.create({
     line_items:[{price:price.id,quantity:1}],
-    metadata:{payment_request_id:String(created.id)},
+    metadata:paymentMetadata,
+    payment_intent_data:{
+     metadata:paymentMetadata,
+     description:description||category
+    },
     after_completion:{
      type:'redirect',
      redirect:{url:origin+'/payment/success'}
