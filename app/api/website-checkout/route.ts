@@ -1,6 +1,7 @@
 import {NextResponse} from 'next/server';
 import Stripe from 'stripe';
 import {supabaseService} from '../../../lib/supabase-server';
+import {getSiteUrl} from '../../../lib/site-url';
 
 export async function POST(req:Request){
  try{
@@ -12,7 +13,7 @@ export async function POST(req:Request){
   const secret=process.env.STRIPE_SECRET_KEY;
   if(!secret) return NextResponse.json({error:'Payments are not configured.'},{status:503});
   const stripe=new Stripe(secret);
-  const origin=new URL(req.url).origin;
+  const siteUrl=getSiteUrl();
   let mode:'payment'|'subscription'='payment';
   let unitAmount=0;
   let description='';
@@ -41,11 +42,12 @@ export async function POST(req:Request){
 
   const priceData:any={currency:'eur',unit_amount:unitAmount,product_data:{name:offer.title,description}};
   if(mode==='subscription') priceData.recurring={interval:'month'};
+  const returnPath=offer.offer_type==='rent'?'/rent':'/buy';
   const session=await stripe.checkout.sessions.create({
    mode,
    line_items:[{quantity:1,price_data:priceData}],
-   success_url:origin+`/${offer.offer_type==='rent'?'rent':'buy'}?payment=success&session_id={CHECKOUT_SESSION_ID}`,
-   cancel_url:origin+`/${offer.offer_type==='rent'?'rent':'buy'}?payment=cancelled`,
+   success_url:siteUrl+`/payment/success?kind=website&return=${encodeURIComponent(returnPath)}&session_id={CHECKOUT_SESSION_ID}`,
+   cancel_url:siteUrl+`/payment/cancelled?return=${encodeURIComponent(returnPath)}`,
    metadata,
    ...(mode==='payment'?{payment_intent_data:{metadata}}:{subscription_data:{metadata}})
   });
