@@ -33,5 +33,5 @@ export default async function Home(){
   <section className="homeCategorySection"><p className="eyebrow">WHO I AM</p><h2>About Me</h2><p>Read the story, mindset and principles behind the projects I build.</p><a className="button" href="/about">Read My Story →</a></section>
 
   <section className="homeCategorySection dark"><p className="eyebrow">CONTACT</p><h2>Let’s Build Something Great</h2><p>New opportunities start with a conversation.</p><a className="lightButton" href="/contact">Contact Me →</a></section>
- </main><footer><b>MORPHITIS ANTONIS</b><span>© 2026 Morphitis Antonis.</span></footer></>
+ </main><footer><div><b>MORPHITIS ANTONIS</b><div className="footerLegal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/refund">Refunds &amp; Cancellations</a></div></div><span>© 2026 Morphitis Antonis.</span></footer></>
 }
