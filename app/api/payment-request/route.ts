@@ -21,6 +21,8 @@ async function requireAdmin(req:Request){
  const db=supabaseService();
  const {data,error}=await db.auth.getUser(token);
  if(error||!data.user) return null;
+ const allowedAdmin=String(process.env.ADMIN_EMAIL||'morfitisantonis@gmail.com').trim().toLowerCase();
+ if(String(data.user.email||'').trim().toLowerCase()!==allowedAdmin) return null;
  return {db,user:data.user};
 }
 
