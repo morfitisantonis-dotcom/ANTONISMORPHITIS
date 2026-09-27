@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export const metadata={title:'Terms & Conditions | Morphitis Antonis',description:'Terms for services, courses, mentoring and website offers on morphitisantonis.live.'};
+export const metadata={title:'Terms & Conditions',description:'Terms for services, courses, mentoring and website offers on morphitisantonis.live.'};
 
 export default function TermsPage(){
  return <main className="listing legalPage">
