@@ -1,6 +1,7 @@
 import {NextResponse} from 'next/server';
 import Stripe from 'stripe';
 import {supabaseService} from '../../../lib/supabase-server';
+import {getSiteUrl} from '../../../lib/site-url';
 
 export async function POST(req:Request){
  try{
@@ -16,15 +17,20 @@ export async function POST(req:Request){
   if(!secret) return NextResponse.json({error:'Payments are not configured yet.'},{status:503});
   const stripe=new Stripe(secret);
   const amount=Math.round((Number(course.price||0)+Number(course.purchase_count||0))*100);
-  const origin=new URL(req.url).origin;
+  if(!Number.isSafeInteger(amount)||amount<50) return NextResponse.json({error:'This course does not have a valid payment price.'},{status:400});
+  const siteUrl=getSiteUrl();
+  const metadata={course_id:String(course.id),purchase_code:String(code).trim()};
   const session=await stripe.checkout.sessions.create({
    mode:'payment',
    line_items:[{quantity:1,price_data:{currency:'eur',unit_amount:amount,product_data:{name:course.title,description:'Project-based 1-to-1 training program'}}}],
-   success_url:origin+'/?course_payment=success#courses',
-   cancel_url:origin+'/?course_payment=cancelled#courses',
-   metadata:{course_id:course.id,purchase_code:String(code).trim()},
-   payment_intent_data:{metadata:{course_id:course.id}}
+   success_url:siteUrl+'/payment/success?kind=course&return=%2Fcourses&session_id={CHECKOUT_SESSION_ID}',
+   cancel_url:siteUrl+'/payment/cancelled?return=%2Fcourses',
+   metadata,
+   payment_intent_data:{metadata:{course_id:String(course.id)}}
   });
   return NextResponse.json({url:session.url});
- }catch(e:any){return NextResponse.json({error:e?.message||'Unable to start checkout.'},{status:500})}
+ }catch(e:any){
+  console.error('Course checkout error',e);
+  return NextResponse.json({error:e?.message||'Unable to start checkout.'},{status:500});
+ }
 }
