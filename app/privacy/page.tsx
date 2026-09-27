@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export const metadata={title:'Privacy Policy | Morphitis Antonis',description:'Privacy information for morphitisantonis.live.'};
+export const metadata={title:'Privacy Policy',description:'Privacy information for morphitisantonis.live.'};
 
 export default function PrivacyPage(){
  return <main className="listing legalPage">
