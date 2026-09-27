@@ -45,6 +45,18 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "Use kind=business, motivation, portfolio or engage" }, { status: 400 });
   }
 
-  await sendTelegramMessage(pick(kind));
-  return NextResponse.json({ ok: true, kind });
+  const target = request.nextUrl.searchParams.get("target") || "start";
+  const chatIds = {
+    start: process.env.TELEGRAM_START_ONLINE_CHAT_ID,
+    social: process.env.TELEGRAM_SOCIAL_ACTION_CHAT_ID,
+    growth: process.env.TELEGRAM_COMMUNITY_GROWTH_CHAT_ID,
+  } as const;
+
+  const chatId = chatIds[target as keyof typeof chatIds];
+  if (!chatId) {
+    return NextResponse.json({ error: "Unknown target or missing chat ID" }, { status: 400 });
+  }
+
+  await sendTelegramMessage(pick(kind), chatId);
+  return NextResponse.json({ ok: true, kind, target });
 }
