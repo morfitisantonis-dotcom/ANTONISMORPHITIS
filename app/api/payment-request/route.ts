@@ -1,6 +1,7 @@
 import {NextResponse} from 'next/server';
 import Stripe from 'stripe';
 import {supabaseService} from '../../../lib/supabase-server';
+import {getSiteUrl} from '../../../lib/site-url';
 
 const CATEGORIES=[
  'Website Development',
@@ -78,7 +79,7 @@ export async function POST(req:Request){
     }
    });
 
-   const origin=new URL(req.url).origin;
+   const siteUrl=getSiteUrl();
    const paymentMetadata={payment_request_id:String(created.id),payment_category:category};
    const link=await stripe.paymentLinks.create({
     line_items:[{price:price.id,quantity:1}],
@@ -89,7 +90,7 @@ export async function POST(req:Request){
     },
     after_completion:{
      type:'redirect',
-     redirect:{url:origin+'/payment/success'}
+     redirect:{url:siteUrl+'/payment/success?kind=request'}
     }
    });
 
