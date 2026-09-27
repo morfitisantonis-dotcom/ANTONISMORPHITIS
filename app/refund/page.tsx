@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export const metadata={title:'Refund & Cancellation Policy | Morphitis Antonis',description:'Refund and cancellation information for purchases and subscriptions.'};
+export const metadata={title:'Refund & Cancellation Policy',description:'Refund and cancellation information for purchases and subscriptions.'};
 
 export default function RefundPage(){
  return <main className="listing legalPage">
