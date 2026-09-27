@@ -1,5 +1,6 @@
 import {NextResponse} from "next/server";
 import Stripe from "stripe";
+import {getSiteUrl} from "../../../lib/site-url";
 
 const plans={
  "social-action":{name:"Morphitis Mentoring Club — Social Action",amount:1500},
@@ -15,7 +16,7 @@ export async function POST(req:Request){
   const selected=plans[plan];
   if(!selected) return NextResponse.json({error:"Invalid mentoring plan."},{status:400});
   const stripe=new Stripe(secret);
-  const origin=new URL(req.url).origin;
+  const siteUrl=getSiteUrl();
   const session=await stripe.checkout.sessions.create({
    mode:"subscription",
    line_items:[{quantity:1,price_data:{currency:"eur",unit_amount:selected.amount,recurring:{interval:"month"},product_data:{name:selected.name}}}],
@@ -23,8 +24,8 @@ export async function POST(req:Request){
    billing_address_collection:"auto",
    metadata:{checkout_type:"mentoring_subscription",mentoring_plan:plan},
    subscription_data:{metadata:{checkout_type:"mentoring_subscription",mentoring_plan:plan}},
-   success_url:origin+"/mentoring/success?session_id={CHECKOUT_SESSION_ID}",
-   cancel_url:origin+"/mentoring"
+   success_url:siteUrl+"/mentoring/success?session_id={CHECKOUT_SESSION_ID}",
+   cancel_url:siteUrl+"/payment/cancelled?return=%2Fmentoring"
   });
   return NextResponse.json({url:session.url});
  }catch(e:any){
