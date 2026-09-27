@@ -13,7 +13,14 @@ export default function CourseBuyButton({courseId}:{courseId:string}){
   }catch{setError('Unable to start payment. Please try again.');setBusy(false)}
  }
  return <div className="courseCheckout">
-  <button type="button" className="buyCourse" onClick={()=>setOpen(true)}>BUY THIS PROGRAM →</button>
-  {open&&<div className="courseCodeBox"><b>Purchase access code</b><p>Enter the temporary code provided by the administrator to continue to secure payment.</p><input autoFocus value={code} onChange={e=>setCode(e.target.value.toUpperCase())} placeholder="AM-XXXX-XXXX"/><div><button type="button" onClick={checkout} disabled={busy||!code.trim()}>{busy?'CHECKING…':'CONTINUE TO PAYMENT →'}</button><button type="button" className="codeCancel" onClick={()=>{setOpen(false);setError('')}}>Cancel</button></div>{error&&<small className="checkoutError">{error}</small>}</div>}
+  <button type="button" className="buyCourse" onClick={()=>setOpen(true)}>PURCHASE ACCESS →</button>
+  {open&&<div className="courseCodeBox">
+   <b>Purchase access code</b>
+   <p>Course places are confirmed individually. Enter the temporary access code provided by Morphitis Antonis to continue to secure Stripe checkout.</p>
+   <input autoFocus value={code} onChange={e=>setCode(e.target.value.toUpperCase())} placeholder="AM-XXXX-XXXX"/>
+   <div><button type="button" onClick={checkout} disabled={busy||!code.trim()}>{busy?'CHECKING…':'CONTINUE TO SECURE PAYMENT →'}</button><button type="button" className="codeCancel" onClick={()=>{setOpen(false);setError('')}}>Cancel</button></div>
+   <a href="/contact">Need an access code? Contact me →</a>
+   {error&&<small className="checkoutError">{error}</small>}
+  </div>}
  </div>
 }
