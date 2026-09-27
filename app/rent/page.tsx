@@ -3,6 +3,7 @@ import Link from "next/link";
 import {useEffect,useState} from "react";
 import {supabase} from "../../lib/supabase";
 import WebsiteCheckoutButton from "../../components/WebsiteCheckoutButton";
+import CheckoutLegal from "../../components/CheckoutLegal";
 
 function RentalCard({x}:{x:any}){
  const min=Math.max(1,Number(x.min_days||1));
@@ -28,5 +29,5 @@ function RentalCard({x}:{x:any}){
 export default function Page(){
  const [items,setItems]=useState<any[]>([]);
  useEffect(()=>{let active=true;async function load(){const {data}=await supabase.from("website_offers").select("*,website_offer_images(*)").eq("offer_type","rent").eq("published",true).order("sort_order");if(active)setItems((data||[]).map((x:any)=>({...x,website_offer_images:(x.website_offer_images||[]).filter((im:any)=>im?.image_url)})))}load();const channel=supabase.channel("rental-live").on("postgres_changes",{event:"*",schema:"public",table:"website_offer_images"},load).on("postgres_changes",{event:"*",schema:"public",table:"website_offers"},load).subscribe();return()=>{active=false;supabase.removeChannel(channel)}},[]);
- return <main className="listing"><p className="eyebrow">READY-MADE WEBSITES</p><h1>Rent a Website</h1><p>Choose pay-per-day rental for the exact number of days you need, or select the separate fixed monthly subscription.</p><div className="grid">{items.length===0?<article><h2>Coming soon</h2><p>New websites will appear here when published from the admin.</p></article>:items.map(x=><RentalCard key={x.id} x={x}/>)}</div><Link href="/">← Back to portfolio</Link></main>
+ return <main className="listing"><p className="eyebrow">READY-MADE WEBSITES</p><h1>Rent a Website</h1><p>Choose pay-per-day rental for the exact number of days you need, or select the separate fixed monthly subscription.</p><div className="grid">{items.length===0?<article><h2>Coming soon</h2><p>New websites will appear here when published from the admin.</p></article>:items.map(x=><RentalCard key={x.id} x={x}/>)}</div><CheckoutLegal/><Link href="/">← Back to portfolio</Link></main>
 }
