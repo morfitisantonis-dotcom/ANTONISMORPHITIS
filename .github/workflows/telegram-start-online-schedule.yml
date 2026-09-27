@@ -1,0 +1,34 @@
+name: Telegram Start Online Schedule
+
+on:
+  schedule:
+    # Cyprus time (EEST / UTC+3): 02:00, 09:00, 15:00, 21:00
+    - cron: "0 23 * * *"
+    - cron: "0 6 * * *"
+    - cron: "0 12 * * *"
+    - cron: "0 18 * * *"
+  workflow_dispatch:
+
+jobs:
+  send-telegram-message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Choose message type
+        id: kind
+        shell: bash
+        run: |
+          HOUR="$(date -u +%H)"
+          case "$HOUR" in
+            23) KIND="motivation" ;;
+            06) KIND="business" ;;
+            12) KIND="portfolio" ;;
+            18) KIND="engage" ;;
+            *)  KIND="motivation" ;;
+          esac
+          echo "kind=$KIND" >> "$GITHUB_OUTPUT"
+
+      - name: Send scheduled Telegram message
+        run: |
+          curl --fail --silent --show-error \
+            --retry 3 \
+            "https://morphitisantonis.live/api/telegram/scheduled?kind=${{ steps.kind.outputs.kind }}"
