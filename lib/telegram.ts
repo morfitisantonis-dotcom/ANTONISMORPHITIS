@@ -1,7 +1,11 @@
 const TELEGRAM_API = "https://api.telegram.org";
 
-export async function sendTelegramMessage(text: string, chatIdOverride?: string | number) {
-  const token = process.env.TELEGRAM_BOT_TOKEN;
+export async function sendTelegramMessage(
+  text: string,
+  chatIdOverride?: string | number,
+  tokenOverride?: string
+) {
+  const token = tokenOverride ?? process.env.TELEGRAM_BOT_TOKEN;
   const chatId = chatIdOverride ?? process.env.TELEGRAM_START_ONLINE_CHAT_ID;
   if (!token || !chatId) throw new Error("Telegram environment variables are missing");
 
