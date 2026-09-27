@@ -12,7 +12,9 @@ export default async function MentoringSuccess({searchParams}:{searchParams:Prom
    const stripe=new Stripe(process.env.STRIPE_SECRET_KEY);
    const session=await stripe.checkout.sessions.retrieve(session_id,{expand:["subscription"]});
    plan=session.metadata?.mentoring_plan||"";
-   active=session.mode==="subscription"&&(session.status==="complete");
+   const subscription=session.subscription&&typeof session.subscription==="object"?session.subscription as Stripe.Subscription:null;
+   const subscriptionActive=Boolean(subscription&&["active","trialing"].includes(subscription.status));
+   active=session.mode==="subscription"&&session.status==="complete"&&subscriptionActive;
   }catch{}
  }
  const invite=plan==="social-action"?process.env.TELEGRAM_SOCIAL_ACTION_INVITE:plan==="community-growth"?process.env.TELEGRAM_COMMUNITY_GROWTH_INVITE:"";
@@ -21,7 +23,7 @@ export default async function MentoringSuccess({searchParams}:{searchParams:Prom
   <span className="successCheck">✓</span>
   <p className="eyebrow">MORPHITIS MENTORING CLUB</p>
   <h1>{active?"Welcome to "+title:"Payment verification"}</h1>
-  {active&&invite?<><p>Your subscription is active. Use the private button below to join your Telegram group.</p><a className="mentoringSuccessJoin" href={invite} target="_blank" rel="noreferrer">Join {title} on Telegram →</a><small>Keep this invitation private. Your access is linked to your active membership.</small></>:active?<p>Your payment is confirmed, but the Telegram invitation has not been configured yet. Please contact Morphitis Antonis and your access will be provided.</p>:<p>We could not verify an active mentoring subscription from this page.</p>}
+  {active&&invite?<><p>Your subscription is active. Use the private button below to join your Telegram group.</p><a className="mentoringSuccessJoin" href={invite} target="_blank" rel="noreferrer">Join {title} on Telegram →</a><small>Keep this invitation private. Your access is linked to your active membership.</small></>:active?<p>Your subscription is active, but the Telegram invitation has not been configured yet. Please contact Morphitis Antonis and your access will be provided.</p>:<p>We could not verify an active mentoring subscription from this page. If you completed payment, contact Morphitis Antonis before attempting another payment.</p>}
   <Link href="/mentoring">← Back to Mentoring Plans</Link>
  </div></main>;
 }
