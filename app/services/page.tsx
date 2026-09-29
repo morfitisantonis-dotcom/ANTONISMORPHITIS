@@ -1,3 +1,4 @@
+import GlobalBackButton from "../../components/GlobalBackButton";
 import Link from "next/link";
 const services=[
  ["Website Development","Professional websites designed around your business, brand and customer journey."],
@@ -8,5 +9,5 @@ const services=[
  ["Maintenance & Support","Ongoing improvements, updates and technical support after launch."]
 ];
 export default function Services(){
- return <main className="listing categoryListing"><p className="eyebrow">WHAT I DO</p><h1>Services</h1><p>Professional digital solutions built around real business needs.</p><div className="cards servicePageCards">{services.map(([title,text])=><article key={title}><h2>{title}</h2><p>{text}</p></article>)}</div><Link className="backLink" href="/">← Back to portfolio</Link></main>
+ return <main className="listing categoryListing"><GlobalBackButton/><p className="eyebrow">WHAT I DO</p><h1>Services</h1><p>Professional digital solutions built around real business needs.</p><div className="cards servicePageCards">{services.map(([title,text])=><article key={title}><h2>{title}</h2><p>{text}</p></article>)}</div><Link className="backLink" href="/">← Back to portfolio</Link></main>
 }
