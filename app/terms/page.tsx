@@ -1,10 +1,9 @@
-import GlobalBackButton from "../../components/GlobalBackButton";
 import Link from 'next/link';
 
 export const metadata={title:'Terms & Conditions',description:'Terms for services, courses, mentoring and website offers on morphitisantonis.live.'};
 
 export default function TermsPage(){
- return <main className="listing legalPage"><GlobalBackButton/>
+ return <main className="listing legalPage">
   <p className="eyebrow">LEGAL</p>
   <h1>Terms &amp; Conditions</h1>
   <p className="legalUpdated">Last updated: 27 September 2026</p>
