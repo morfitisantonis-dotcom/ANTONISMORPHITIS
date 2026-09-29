@@ -2,7 +2,6 @@ import type {Metadata} from "next";
 import "./globals.css";
 import "./category-pages.css";
 import AuthRecoveryRedirect from "../components/AuthRecoveryRedirect";
-import GlobalBackButton from "../components/GlobalBackButton";
 
 export const metadata:Metadata={
  metadataBase:new URL("https://morphitisantonis.live"),
@@ -27,5 +26,5 @@ export const metadata:Metadata={
 };
 
 export default function RootLayout({children}:{children:React.ReactNode}){
- return <html lang="en"><body><AuthRecoveryRedirect/><GlobalBackButton/>{children}</body></html>
+ return <html lang="en"><body><AuthRecoveryRedirect/>{children}</body></html>
 }
