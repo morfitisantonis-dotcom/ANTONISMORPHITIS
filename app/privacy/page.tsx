@@ -1,9 +1,10 @@
+import GlobalBackButton from "../../components/GlobalBackButton";
 import Link from 'next/link';
 
 export const metadata={title:'Privacy Policy',description:'Privacy information for morphitisantonis.live.'};
 
 export default function PrivacyPage(){
- return <main className="listing legalPage">
+ return <main className="listing legalPage"><GlobalBackButton/>
   <p className="eyebrow">LEGAL</p>
   <h1>Privacy Policy</h1>
   <p className="legalUpdated">Last updated: 27 September 2026</p>
