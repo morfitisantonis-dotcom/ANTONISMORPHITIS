@@ -1,9 +1,10 @@
+import GlobalBackButton from "../../components/GlobalBackButton";
 import Link from 'next/link';
 
 export const metadata={title:'Refund & Cancellation Policy',description:'Refund and cancellation information for purchases and subscriptions.'};
 
 export default function RefundPage(){
- return <main className="listing legalPage">
+ return <main className="listing legalPage"><GlobalBackButton/>
   <p className="eyebrow">LEGAL</p>
   <h1>Refund &amp; Cancellation Policy</h1>
   <p className="legalUpdated">Last updated: 27 September 2026</p>
