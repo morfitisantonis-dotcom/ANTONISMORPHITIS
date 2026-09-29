@@ -1,5 +1,5 @@
-import GlobalBackButton from "../../components/GlobalBackButton";
 'use client';
+import GlobalBackButton from "../../components/GlobalBackButton";
 import Link from "next/link";
 import {useEffect,useState} from "react";
 import {supabase} from "../../lib/supabase";
