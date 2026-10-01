@@ -9,7 +9,7 @@ const nav=[
  ["Mentoring","/mentoring","Community & guidance"],
  ["Buy","/buy","Own a website"],
  ["About","/about","My story"],
- ["Contact","/contact","Let's work together"]
+ ["Office","/contact","Calendar & Telegram"]
 ];
 
 export default async function Home(){
@@ -30,6 +30,6 @@ export default async function Home(){
 
   <section className="homeCategorySection"><p className="eyebrow">WHO I AM</p><h2>About Me</h2><p>Read the story, mindset and principles behind the projects I build.</p><a className="button" href="/about">Read My Story →</a></section>
 
-  <section className="homeCategorySection dark"><p className="eyebrow">CONTACT</p><h2>Let’s Build Something Great</h2><p>New opportunities start with a conversation.</p><a className="lightButton" href="/contact">Contact Me →</a></section>
+  <section className="homeCategorySection dark"><p className="eyebrow">OFFICE</p><h2>Let’s Build Something Great</h2><p>Book a meeting through the calendar or contact me directly on Telegram.</p><a className="lightButton" href="/contact">Enter the Office →</a></section>
  </main><footer><div><b>MORPHITIS ANTONIS</b><div className="footerLegal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/refund">Refunds &amp; Cancellations</a></div></div><span>© 2026 Morphitis Antonis.</span></footer></>
 }
