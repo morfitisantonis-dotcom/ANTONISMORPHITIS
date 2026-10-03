@@ -248,3 +248,19 @@
 
 /* Morphitis Antonis Office */
 .officePage{min-height:100vh;background:#101817;color:#f8f6f1}.officeHero{min-height:100vh;padding:110px 5% 70px;border:0}.officeHero>.eyebrow{color:#c8ae81}.officeHero>h1{font-size:clamp(52px,7vw,96px);line-height:.96;max-width:1100px;margin:18px 0 28px}.officeLead{max-width:720px;font-size:19px;line-height:1.7;color:#cbd2cf}.officeGrid{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:1120px;margin:58px 0 30px}.officeGrid article{position:relative;min-height:330px;padding:34px;border:1px solid #36423f;background:#14201d;display:flex;flex-direction:column}.officeGrid article:nth-child(2){background:#f5f1e9;color:#101817}.officeIcon{width:44px;height:44px;border:1px solid #c8ae81;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:900;letter-spacing:1px;margin-bottom:35px}.officeGrid h2{font-size:38px;margin:8px 0 12px}.officeGrid p:not(.eyebrow){line-height:1.6;max-width:460px}.officeGrid a{display:inline-flex;align-items:center;justify-content:center;width:max-content;margin-top:auto;padding:15px 20px;text-decoration:none;font-size:12px;font-weight:900;letter-spacing:.8px;text-transform:uppercase}.officePrimary{background:#f8f6f1;color:#101817}.officeSecondary{background:#123f33;color:#fff}.officeNote{font-size:12px;letter-spacing:1px;color:#9fa9a5;margin:0 0 42px}.officeHero .backLink{display:inline-block;color:#fff;font-weight:800;text-decoration:none}@media(max-width:760px){.officeHero{padding:70px 5% 50px}.officeHero>h1{font-size:50px}.officeLead{font-size:16px}.officeGrid{grid-template-columns:1fr;margin-top:38px}.officeGrid article{min-height:300px;padding:25px}.officeGrid h2{font-size:32px}.officeGrid a{width:100%}}
+
+
+/* Public Rent a Website */
+.rentalOptions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:22px}
+.rentalChoice{display:flex;flex-direction:column;gap:10px;border:1px solid #d8d2c7;background:#f6f3ed;padding:18px}
+.rentalChoice>b{font-family:Georgia,serif;font-size:24px;font-weight:400}
+.rentalChoice p{margin:0;font-size:18px;font-weight:800}
+.rentalChoice span{font-size:12px;color:#666;line-height:1.5}
+.rentalChoice label{display:grid;gap:7px;font-size:12px;font-weight:800}
+.rentalChoice input{width:100%;padding:11px 12px;border:1px solid #cfc8bc;background:#fff;font:inherit}
+.rentalChoice strong{font-size:15px}
+.websiteCheckout{margin-top:auto;padding-top:8px}
+.pricingBuyButton{width:100%;border:1px solid #123f33;background:#123f33;color:#fff;padding:14px 16px;font-weight:800;cursor:pointer}
+.pricingBuyButton:disabled{opacity:.6;cursor:wait}
+.checkoutError{display:block;margin-top:8px;color:#a13b2b;line-height:1.4}
+@media(max-width:700px){.rentalOptions{grid-template-columns:1fr}}
