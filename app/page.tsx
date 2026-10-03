@@ -7,6 +7,7 @@ const nav=[
  ["Services","/services","What I can build"],
  ["Courses","/courses","Learn & build with me"],
  ["Mentoring","/mentoring","Community & guidance"],
+ ["Rent","/rent","Rent a website"],
  ["Buy","/buy","Own a website"],
  ["About","/about","My story"],
  ["Office","/contact","Calendar & Telegram"]
@@ -25,6 +26,7 @@ export default async function Home(){
 
   <section className="homeCategorySection"><p className="eyebrow">PROJECT-BASED TRAINING</p><h2>Courses</h2><p>Learn by building a real project with personal guidance from the first idea to a finished launch.</p><a className="button" href="/courses">Explore Courses →</a></section>
 
+  <section className="homeCategorySection"><p className="eyebrow">FLEXIBLE WEBSITE ACCESS</p><h2>Rent a Website</h2><p>Use a ready website for the days you need, or choose a monthly subscription for ongoing access.</p><a className="button" href="/rent">Explore Websites for Rent →</a></section>
 
   <section className="homeCategorySection"><p className="eyebrow">OWN IT</p><h2>Buy a Website</h2><p>Purchase a complete website once and make it yours.</p><a className="button" href="/buy">Explore Websites for Sale →</a></section>
 
